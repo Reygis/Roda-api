@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Reygis/Roda-api#readme",
   "dependencies": {
+    "@types/cors": "^2.8.12",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.13.2",
     "cors": "^2.8.5",
@@ -26,7 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "typeorm-extension": "^2.1.10"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
