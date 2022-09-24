@@ -4,31 +4,34 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    ManyToMany,
     ManyToOne,
     JoinColumn
 } from "typeorm"
 
 import { Length } from "class-validator"
+
 import { User } from "./User"
 import { Book } from "./Book"
 
-@Entity("reviews")
-export class Review {
+
+@Entity("groups")
+export class Group {
 
     @PrimaryGeneratedColumn()
-    idreview: number
+    idgroup: number
     
     @Column()
     @Length(2, 70)
-    tags: string
+    name: string
     
     @Column()
-    @Length(2, 500)
-    content: string
+    @Length(2, 255)
+    about: string
     
     @Column()
-    @Length(1, 5)
-    rating: number
+    @Length(2, 255)
+    discussion: string
     
     @CreateDateColumn()
     created_at: Date;
@@ -36,12 +39,11 @@ export class Review {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @ManyToOne(() => User, (user) => user.reviews)
-    @JoinColumn({ name: "user_iduser" })
-    users: User;
-
-    @ManyToOne(() => Book, (book) => book.reviews)
+    @ManyToOne(() => Book, (book) => book.groups)
     @JoinColumn({ name: "book_idbook" })
     books: Book;
-    
+
+    @ManyToMany(() => User, (user) => user.groups)
+    users: User[]
+
 }
