@@ -16,7 +16,7 @@ import { Group } from './Group';
 import { Review } from "./Review"
 
 
-@Entity("Books")
+@Entity("books")
 export class Book {
 
     @PrimaryGeneratedColumn()
