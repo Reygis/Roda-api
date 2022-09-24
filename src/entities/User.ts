@@ -1,3 +1,4 @@
+
 import { 
     Entity, 
     PrimaryGeneratedColumn, 
@@ -15,6 +16,7 @@ import { Group } from './Group';
 import { Book } from './Book';
 import { Review } from './Review';
 
+import * as bcrypt from "bcryptjs"
 // import { group } from 'console';
 
 @Entity("users")
@@ -59,5 +61,14 @@ export class User {
     })
     @JoinTable()
     groups: Group[];
+
+
+    hashPassword() {
+        this.password = bcrypt.hashSync(this.password, 8)
+    }
+
+    checkPasswordIsValid(unencripytedPassword: string) {
+        return bcrypt.compareSync(unencripytedPassword, this.password)
+    }
     
 }
