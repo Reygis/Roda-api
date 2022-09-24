@@ -4,7 +4,9 @@
   "description": "Api do projeto Roda, desafio chefão proposto pela Gama Academy no #XP43",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec ts-node ./src/index.ts",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run"
   },
   "repository": {
     "type": "git",

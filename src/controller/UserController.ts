@@ -6,36 +6,32 @@ import bcrypt from 'bcryptjs';
 
 export class UserController {
     
-	static createUser = async (req: Request, res: Response) => {
-		let { name, email, password, bio, imgurl } = req.body
-        
-        let user: User = new User()
-        user.name = name
-				user.email = email
-				user.password = password
-        user.bio = bio
-        user.imgurl = imgurl
+	async create(req: Request, res: Response){
+        const { name, email, password, bio, imgurl } = req.body;
 
-        const errors = await validate(user)
-        if(errors.length > 0) {
-            return res.status(400).send(errors)
+        const userExists = await userRepository.findOneBy({email});
+
+        if(userExists){
+            return res.status(400).json({message: "Email já cadastrado!"})
         }
 
-		const emailExists = await userRepository.findOneBy({email})
+        const hashPassword = await bcrypt.hash(password, 10);
 
-		const hashPassword = await bcrypt.hash(password, 10)
+        const newUser = userRepository.create({
+            name,
+            email,
+            password: hashPassword ,
+            bio,
+            imgurl
+        });
 
-		try {
-			const newUser = userRepository.create({ name, email, password, bio, imgurl })
-			await userRepository.save(newUser)
-			const {password: _, ...user} = newUser
-			return res.status(201).json(user)
+        await userRepository.save(newUser);
 
-		} catch (error) {
-			console.log(error)
-			return res.status(500).json({ message: 'Internal Server Error' })
-		}
-	}
+        const {password: _, ...user} = newUser;
+
+        return res.status(201).send(user);
+
+    }
 
 	static editUser = async (req: Request, res: Response) => {
 		const { name, email, password, bio, imgurl } = req.body
