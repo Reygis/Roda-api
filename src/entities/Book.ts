@@ -45,7 +45,7 @@ export class Book {
     updated_at: Date;
 
     @ManyToOne(() => User, (user) => user.books)
-    @JoinColumn({ name: "user_iduser" })
+    @JoinColumn({ name: "users_iduser" })
     users: User;
 
     @OneToMany(() => Review, (review) => review.books)

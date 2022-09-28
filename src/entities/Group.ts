@@ -40,7 +40,7 @@ export class Group {
     updated_at: Date;
 
     @ManyToOne(() => Book, (book) => book.groups)
-    @JoinColumn({ name: "book_idbook" })
+    @JoinColumn({ name: "books_idbook" })
     books: Book;
 
     @ManyToMany(() => User, (user) => user.groups)

@@ -2,9 +2,9 @@ import { userRepository } from './../repositories/userRepository';
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import config from "../config/secret";
+
 export class LoginController {
-   async login(req: Request, res: Response){
+   static login = async (req: Request, res: Response) => {
         const { email, password } = req.body;
 
         const user = await userRepository.findOneBy({email});
@@ -37,7 +37,7 @@ export class LoginController {
 
     return res.json(req.user);
 
-}
+    }
 }
 //         return res.send({
 //             token:token,

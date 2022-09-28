@@ -8,7 +8,7 @@ import {
     JoinColumn
 } from "typeorm"
 
-import { Length } from "class-validator"
+import { Length, IsInt, Min, Max } from "class-validator"
 import { User } from "./User"
 import { Book } from "./Book"
 
@@ -27,7 +27,9 @@ export class Review {
     content: string
     
     @Column()
-    @Length(1, 5)
+    @IsInt()
+    @Min(1)
+    @Max(5)
     rating: number
     
     @CreateDateColumn()
@@ -37,11 +39,11 @@ export class Review {
     updated_at: Date;
 
     @ManyToOne(() => User, (user) => user.reviews)
-    @JoinColumn({ name: "user_iduser" })
+    @JoinColumn({ name: "users_iduser" })
     users: User;
 
     @ManyToOne(() => Book, (book) => book.reviews)
-    @JoinColumn({ name: "book_idbook" })
+    @JoinColumn({ name: "books_idbook" })
     books: Book;
     
 }

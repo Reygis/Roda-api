@@ -32,7 +32,9 @@ __decorate([
 ], Review.prototype, "content", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(1, 5),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.Max)(5),
     __metadata("design:type", Number)
 ], Review.prototype, "rating", void 0);
 __decorate([
@@ -45,12 +47,12 @@ __decorate([
 ], Review.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.reviews),
-    (0, typeorm_1.JoinColumn)({ name: "user_iduser" }),
+    (0, typeorm_1.JoinColumn)({ name: "users_iduser" }),
     __metadata("design:type", User_1.User)
 ], Review.prototype, "users", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Book_1.Book, (book) => book.reviews),
-    (0, typeorm_1.JoinColumn)({ name: "book_idbook" }),
+    (0, typeorm_1.JoinColumn)({ name: "books_idbook" }),
     __metadata("design:type", Book_1.Book)
 ], Review.prototype, "books", void 0);
 Review = __decorate([

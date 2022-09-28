@@ -45,7 +45,7 @@ __decorate([
 ], Group.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Book_1.Book, (book) => book.groups),
-    (0, typeorm_1.JoinColumn)({ name: "book_idbook" }),
+    (0, typeorm_1.JoinColumn)({ name: "books_idbook" }),
     __metadata("design:type", Book_1.Book)
 ], Group.prototype, "books", void 0);
 __decorate([
