@@ -4,7 +4,7 @@ exports.AppDataSource = void 0;
 require("dotenv/config");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
-const MainSeeder_1 = require("../seeds/MainSeeder");
+const MainSeeder_1 = require("./seeds/MainSeeder");
 const port = process.env.DB_PORT;
 const options = {
     type: 'mysql',
@@ -13,8 +13,8 @@ const options = {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    entities: ["./src/entities/*.{ts,js}"],
-    migrations: ["./src/migrations/*.{ts,js}"],
+    entities: [`${__dirname}/**/entities/*.{ts,js}`],
+    migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
     seeds: [MainSeeder_1.MainSeeder],
 };
 exports.AppDataSource = new typeorm_1.DataSource(options);

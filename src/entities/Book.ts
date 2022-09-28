@@ -6,7 +6,7 @@ import {
     UpdateDateColumn,
     OneToMany,
     JoinColumn,
-    ManyToOne,
+    ManyToOne
 } from "typeorm"
 
 import { Length } from "class-validator"
