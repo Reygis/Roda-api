@@ -9,9 +9,6 @@ const userRepository_1 = require("./../repositories/userRepository");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class LoginController {
-    async getProfiles(req, res) {
-        return res.json(req.user);
-    }
 }
 exports.LoginController = LoginController;
 _a = LoginController;
@@ -35,12 +32,6 @@ LoginController.login = async (req, res) => {
         token: token
     });
 };
-//         return res.send({
-//             token:token,
-//             user:{iduser:user.iduser,
-//             name:user.name,
-//             email:user.email,
-//             bio:user.bio,
-//             imgscc:user.imgurl}
-//         })
-//     }
+LoginController.getProfiles = async (req, res) => {
+    return res.json(req.user);
+};

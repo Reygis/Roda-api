@@ -3,7 +3,6 @@ import { User } from '../entities/User';
 import { Request, Response } from "express"
 import { validate } from 'class-validator';
 import bcrypt from 'bcryptjs';
-import jwt from "jsonwebtoken";
 
 export class UserController {
     
@@ -35,21 +34,9 @@ export class UserController {
     }
 
 	static editUser = async (req:Request, res:Response) => {      
-        const {authorization} = req.headers;
-        if (!authorization){return}
-        const token = authorization.split(" ")[1];
-
-        let iduser
-        try {
-            const jwtPayload = <any>jwt.verify(token, process.env.JWT_PASS ?? "")
-            iduser = jwtPayload.userId
-        } catch (error) {
-            return res.status(401).send
-        }
-       
         const {name, email, bio, imgurl} = req.body   
         
-        let user: User = await userRepository.findOneByOrFail({iduser})
+        const user = req.user
         if(name) user.name = name;
         if(email) user.email = email;
         if(bio) user.bio = bio;

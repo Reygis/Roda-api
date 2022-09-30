@@ -2,10 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { userRepository } from './../repositories/userRepository';
 import jwt from "jsonwebtoken";
 
-type JwtPayLoad = {
-    id: number
-}
-
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
     
@@ -24,7 +20,9 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         res.status(401).send
     }
 
-    if (!jwtPayload) return res.status(403).json({message: "Não Autorizado"})
+    if (!jwtPayload) {
+        return res.status(403).json({message: "Não Autorizado"})
+    }
    
     const user = await userRepository.findOneOrFail({where:{iduser: jwtPayload.id}});
 
