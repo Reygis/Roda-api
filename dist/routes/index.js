@@ -9,7 +9,7 @@ const auth_1 = __importDefault(require("./auth"));
 const book_1 = __importDefault(require("./book"));
 const review_1 = __importDefault(require("./review"));
 const routes = (0, express_1.Router)();
-routes.use(auth_1.default);
+routes.use('/login', auth_1.default);
 routes.use('/user', user_1.default);
 routes.use('/book', book_1.default);
 routes.use('/review', review_1.default);

@@ -21,8 +21,9 @@ const authMiddleware = async (req, res, next) => {
     catch (error) {
         res.status(401).send;
     }
-    if (!jwtPayload)
+    if (!jwtPayload) {
         return res.status(403).json({ message: "Não Autorizado" });
+    }
     const user = await userRepository_1.userRepository.findOneOrFail({ where: { iduser: jwtPayload.id } });
     if (!user) {
         return res.status(403).json({ message: "Não Autorizado" });
