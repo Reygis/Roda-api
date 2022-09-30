@@ -8,6 +8,7 @@ exports.UserController = void 0;
 const userRepository_1 = require("../repositories/userRepository");
 const class_validator_1 = require("class-validator");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class UserController {
 }
 exports.UserController = UserController;
@@ -31,8 +32,22 @@ UserController.create = async (req, res) => {
     return res.status(201).send(user);
 };
 UserController.editUser = async (req, res) => {
+    var _b;
+    const { authorization } = req.headers;
+    if (!authorization) {
+        return;
+    }
+    const token = authorization.split(" ")[1];
+    let iduser;
+    try {
+        const jwtPayload = jsonwebtoken_1.default.verify(token, (_b = process.env.JWT_PASS) !== null && _b !== void 0 ? _b : "");
+        iduser = jwtPayload.userId;
+    }
+    catch (error) {
+        return res.status(401).send;
+    }
     const { name, email, bio, imgurl } = req.body;
-    const user = req.user;
+    let user = await userRepository_1.userRepository.findOneByOrFail({ iduser });
     if (name)
         user.name = name;
     if (email)
