@@ -1,28 +1,12 @@
 import { Book } from '../entities/Book';
-import { userRepository } from '../repositories/userRepository';
 import { bookRepository } from '../repositories/bookRepository';
 import { Request, Response } from "express"
-import jwt from "jsonwebtoken";
 
 export class BookController {
     
 	static create = async (req: Request, res: Response) => {
-        const {authorization} = req.headers;
-        if (!authorization){return}
-        const token = authorization.split(" ")[1];
-         
-        let iduser
-        try {
-            const jwtPayload = <any>jwt.verify(token, process.env.JWT_PASS ?? "")
-            iduser = jwtPayload.userId
-        } catch (error) {
-            return res.status(401).send
-        }
-
-        const users = await userRepository.findOneBy({iduser})
-        if (!users) return res.status(404).json({message: 'User not found'})
-
         const {  name, genres, description, condition } = req.body;
+        const users = req.user;
 
         try {
             const book = bookRepository.create({name,genres,description,condition,users})

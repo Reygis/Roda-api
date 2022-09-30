@@ -7,7 +7,7 @@ import review from './review'
 
 const routes = Router()
 
-routes.use(auth)
+routes.use('/login',auth)
 routes.use('/user', user)
 routes.use('/book', book)
 routes.use('/review', review)
