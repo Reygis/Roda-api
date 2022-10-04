@@ -16,5 +16,8 @@ const options = {
     entities: [`${__dirname}/**/entities/*.{ts,js}`],
     migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
     seeds: [MainSeeder_1.MainSeeder],
+    "extra": {
+        "connectionLimit": 5
+    }
 };
 exports.AppDataSource = new typeorm_1.DataSource(options);
