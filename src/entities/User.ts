@@ -37,11 +37,11 @@ export class User {
     @Length(4, 128)
     password:string
     
-    @Column()
-    @Length(0, 500)
+    @Column({ nullable: true })
+    @Length(500)
     bio:string
 
-    @Column()
+    @Column({ nullable: true })
     imgurl:string
 
     @CreateDateColumn()
