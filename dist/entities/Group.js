@@ -27,12 +27,12 @@ __decorate([
 ], Group.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 255),
+    (0, class_validator_1.Length)(0, 255),
     __metadata("design:type", String)
 ], Group.prototype, "about", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 255),
+    (0, class_validator_1.Length)(0, 255),
     __metadata("design:type", String)
 ], Group.prototype, "discussion", void 0);
 __decorate([

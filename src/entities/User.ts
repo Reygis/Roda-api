@@ -34,11 +34,11 @@ export class User {
     email:string
     
     @Column()
-    @Length(7, 128)
+    @Length(4, 128)
     password:string
     
     @Column()
-    @Length(2, 500)
+    @Length(0, 500)
     bio:string
 
     @Column()

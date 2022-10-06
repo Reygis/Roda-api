@@ -64,12 +64,12 @@ __decorate([
 ], User.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(7, 128),
+    (0, class_validator_1.Length)(4, 128),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 500),
+    (0, class_validator_1.Length)(0, 500),
     __metadata("design:type", String)
 ], User.prototype, "bio", void 0);
 __decorate([

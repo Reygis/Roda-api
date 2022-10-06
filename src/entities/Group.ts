@@ -26,11 +26,11 @@ export class Group {
     name: string
     
     @Column()
-    @Length(2, 255)
+    @Length(0, 255)
     about: string
     
     @Column()
-    @Length(2, 255)
+    @Length(0, 255)
     discussion: string
     
     @CreateDateColumn()
