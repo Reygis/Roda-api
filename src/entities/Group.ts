@@ -26,11 +26,11 @@ export class Group {
     name: string
     
     @Column()
-    @Length(2, 255)
+    @Length(0, 255)
     about: string
     
     @Column()
-    @Length(2, 255)
+    @Length(0, 255)
     discussion: string
     
     @CreateDateColumn()
@@ -40,7 +40,7 @@ export class Group {
     updated_at: Date;
 
     @ManyToOne(() => Book, (book) => book.groups)
-    @JoinColumn({ name: "book_idbook" })
+    @JoinColumn({ name: "books_idbook" })
     books: Book;
 
     @ManyToMany(() => User, (user) => user.groups)

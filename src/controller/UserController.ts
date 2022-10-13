@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 
 export class UserController {
     
-	async create(req: Request, res: Response){
+	static create = async (req: Request, res: Response) => {
         const { name, email, password, bio, imgurl } = req.body;
 
         const userExists = await userRepository.findOneBy({email});
@@ -33,41 +33,16 @@ export class UserController {
 
     }
 
-	static editUser = async (req: Request, res: Response) => {
-		const { name, email, password, bio, imgurl } = req.body
-		const idUser : number = parseInt(req.params.idUser)
-		let user : User
+	static editUser = async (req:Request, res:Response) => {      
+        const {name, email, bio, imgurl} = req.body   
+        
+        const user = req.user
+        if(name) user.name = name;
+        if(email) user.email = email;
+        if(bio) user.bio = bio;
+        if(imgurl) user.imgurl = imgurl;
 
-		try {
-			user = await userRepository.findOneByOrFail({ iduser: Number(idUser) })
-		} catch (error) {
-			return res.status(404).send("User not found")
-		}
-
-		if(name) {
-			user.name = name
-		}
-		
-		if(email) {
-			user.email = email
-		}
-    
-    if(password){
-      const newPassword = bcrypt.hashSync(password, 10)
-      user.password = newPassword
-    }
-
-		if(bio) {
-			user.bio = bio
-		}
-
-		if(imgurl) {
-			user.imgurl = imgurl
-		}
-		
-		
-		const errors = await validate(user)
-
+        const errors = await validate(user)
         if (errors.length > 0) {
             return res.status(400).send(errors)
         }
@@ -75,56 +50,28 @@ export class UserController {
         try {
             await userRepository.save(user)    
         } catch (error) {
-            return res.status(409).send("Email already in use")
+            return res.status(409)
         }
 
-        return res.status(201).send("edited user")
+        return res.status(201).send("user edited")
     }
 
-
-    static userById =  async (req: Request, res: Response) => {
-      const iduser: number = parseInt(req.params.iduser, 10)
-
-      let user: User
-
-      try {
-          user = await userRepository.findOneByOrFail({iduser})
-      } catch (error) {
-          return res.status(404).send("User not found")            
-      }
-  
-      return res.send(user)
-  }
-
-
-  static userByEmail =  async (req: Request, res: Response) => {
-    const email: string = req.params.email
-
-    let user: User
-
-    try {
-        user = await userRepository.findOneByOrFail({email})
-    } catch (error) {
-        return res.status(404).send("User not found")            
+    static userByName =  async (req: Request, res: Response) => {
+        const name: string = req.params.name
+        
+        let users: User[]
+        try {
+            users = await userRepository
+            .createQueryBuilder("user")
+            .where("user.name like :name", { name:`%${name}%` })
+            .getMany();
+        } catch (error) {
+            return res.status(404).send("User not found")            
+        }
+        
+        return res.send(users.map(item => ({ name:item.name, email:item.email, bio:item.bio, imgurl:item.imgurl})))
     }
-
-    return res.send(user)
-  }
-
-  static userByName =  async (req: Request, res: Response) => {
-    const name: string = req.params.email
-
-    let user: User
-
-    try {
-        user = await userRepository.findOneByOrFail({name})
-    } catch (error) {
-        return res.status(404).send("User not found")            
-    }
-
-    return res.send(user)
-}
-
+    
 	static listAllUser = async (req: Request, res: Response) => {      
         const users = await userRepository.find({
             select: [ "iduser", "name", "email", "bio", "imgurl" ]
@@ -132,3 +79,16 @@ export class UserController {
         return res.send(users)
     }	
 }
+//   static userByEmail =  async (req: Request, res: Response) => {
+//     const email: string = req.params.email
+
+//     let user: User
+
+//     try {
+//         user = await userRepository.findOneByOrFail({email})
+//     } catch (error) {
+//         return res.status(404).send("User not found")            
+//     }
+
+//     return res.send(user)
+//   }

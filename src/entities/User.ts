@@ -34,14 +34,14 @@ export class User {
     email:string
     
     @Column()
-    @Length(7, 128)
+    @Length(4, 128)
     password:string
     
-    @Column()
-    @Length(2, 500)
+    @Column({ nullable: true })
+    @Length(500)
     bio:string
 
-    @Column()
+    @Column({ nullable: true })
     imgurl:string
 
     @CreateDateColumn()

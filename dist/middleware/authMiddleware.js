@@ -13,8 +13,18 @@ const authMiddleware = async (req, res, next) => {
         return res.status(403).json({ message: "O Usuário não está logado!" });
     }
     const token = authorization.split(" ")[1];
-    const { id } = jsonwebtoken_1.default.verify(token, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : "");
-    const user = await userRepository_1.userRepository.findOneOrFail({ where: { iduser: id } });
+    let jwtPayload;
+    try {
+        jwtPayload = jsonwebtoken_1.default.verify(token, (_a = process.env.JWT_PASS) !== null && _a !== void 0 ? _a : "");
+        res.locals.jwtPayload = jwtPayload;
+    }
+    catch (error) {
+        res.status(401).send;
+    }
+    if (!jwtPayload) {
+        return res.status(403).json({ message: "Não Autorizado" });
+    }
+    const user = await userRepository_1.userRepository.findOneOrFail({ where: { iduser: jwtPayload.id } });
     if (!user) {
         return res.status(403).json({ message: "Não Autorizado" });
     }
