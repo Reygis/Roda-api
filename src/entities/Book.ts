@@ -26,17 +26,20 @@ export class Book {
     @Length(2, 70)
     name: string
     
-    @Column()
-    @Length(2, 70)
-    genres: string
-    
-    @Column()
-    @Length(2, 255)
-    description: string
+    @Column({ nullable: true, type:"simple-array" })
+    authors: Array<string>
 
-    @Column()
-    @Length(1, 5)
-    condition: number
+    @Column({ nullable: true, type:"text" })
+    description: string
+   
+    @Column({ nullable: true })
+    pageCount: number
+
+    @Column({ nullable: true })
+    imageurl: string
+    
+    @Column({ nullable: true, type:"simple-array" })
+    genres: Array<string>
     
     @CreateDateColumn()
     created_at: Date;
@@ -51,49 +54,7 @@ export class Book {
     @OneToMany(() => Review, (review) => review.books)
     reviews: Review[];
 
-    @OneToMany(() => Group, (group) => group.books)
-    groups: Group[];
+    // @OneToMany(() => Group, (group) => group.books)
+    // groups: Group[];
     
 }
-
-// import { 
-//     Entity, 
-//     PrimaryGeneratedColumn, 
-//     Column,
-//     CreateDateColumn,
-//     UpdateDateColumn,
-//     OneToMany
-// } from "typeorm"
-
-// import { Length } from "class-validator"
-
-// import { Review } from "./Review"
-
-// @Entity("books")
-// export class Book {
-
-//     @PrimaryGeneratedColumn()
-//     idbook: number
-    
-//     @Column()
-//     @Length(2, 70)
-//     name: string
-    
-//     @Column()
-//     @Length(2, 70)
-//     genres: string
-    
-//     @Column()
-//     @Length(2, 255)
-//     description: string
-    
-//     @CreateDateColumn()
-//     created_at: Date;
-  
-//     @UpdateDateColumn()
-//     updated_at: Date;
-
-//     @OneToMany(() => Review, (review) => review.book)
-//     reviews: Review[];
-    
-// }

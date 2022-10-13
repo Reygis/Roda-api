@@ -13,7 +13,6 @@ exports.Book = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const User_1 = require("./User");
-const Group_1 = require("./Group");
 const Review_1 = require("./Review");
 let Book = class Book {
 };
@@ -27,20 +26,25 @@ __decorate([
     __metadata("design:type", String)
 ], Book.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 70),
-    __metadata("design:type", String)
-], Book.prototype, "genres", void 0);
+    (0, typeorm_1.Column)({ nullable: true, type: "simple-array" }),
+    __metadata("design:type", Array)
+], Book.prototype, "authors", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 255),
+    (0, typeorm_1.Column)({ nullable: true, type: "text" }),
     __metadata("design:type", String)
 ], Book.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(1, 5),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], Book.prototype, "condition", void 0);
+], Book.prototype, "pageCount", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Book.prototype, "imageurl", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, type: "simple-array" }),
+    __metadata("design:type", Array)
+], Book.prototype, "genres", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
@@ -58,41 +62,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Review_1.Review, (review) => review.books),
     __metadata("design:type", Array)
 ], Book.prototype, "reviews", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Group_1.Group, (group) => group.books),
-    __metadata("design:type", Array)
-], Book.prototype, "groups", void 0);
 Book = __decorate([
     (0, typeorm_1.Entity)("books")
 ], Book);
 exports.Book = Book;
-// import { 
-//     Entity, 
-//     PrimaryGeneratedColumn, 
-//     Column,
-//     CreateDateColumn,
-//     UpdateDateColumn,
-//     OneToMany
-// } from "typeorm"
-// import { Length } from "class-validator"
-// import { Review } from "./Review"
-// @Entity("books")
-// export class Book {
-//     @PrimaryGeneratedColumn()
-//     idbook: number
-//     @Column()
-//     @Length(2, 70)
-//     name: string
-//     @Column()
-//     @Length(2, 70)
-//     genres: string
-//     @Column()
-//     @Length(2, 255)
-//     description: string
-//     @CreateDateColumn()
-//     created_at: Date;
-//     @UpdateDateColumn()
-//     updated_at: Date;
-//     @OneToMany(() => Review, (review) => review.book)
-//     reviews: Review[];
-// }

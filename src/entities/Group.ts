@@ -32,6 +32,9 @@ export class Group {
     @Column()
     @Length(0, 255)
     discussion: string
+
+    @Column()
+    books: string
     
     @CreateDateColumn()
     created_at: Date;
@@ -39,9 +42,9 @@ export class Group {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @ManyToOne(() => Book, (book) => book.groups)
-    @JoinColumn({ name: "books_idbook" })
-    books: Book;
+    // @ManyToOne(() => Book, (book) => book.groups)
+    // @JoinColumn({ name: "books_idbook" })
+    // books: Book;
 
     @ManyToMany(() => User, (user) => user.groups)
     users: User[]

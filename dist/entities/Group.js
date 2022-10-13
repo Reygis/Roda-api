@@ -13,7 +13,6 @@ exports.Group = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const User_1 = require("./User");
-const Book_1 = require("./Book");
 let Group = class Group {
 };
 __decorate([
@@ -36,6 +35,10 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "discussion", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Group.prototype, "books", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Group.prototype, "created_at", void 0);
@@ -43,11 +46,6 @@ __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], Group.prototype, "updated_at", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Book_1.Book, (book) => book.groups),
-    (0, typeorm_1.JoinColumn)({ name: "books_idbook" }),
-    __metadata("design:type", Book_1.Book)
-], Group.prototype, "books", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => User_1.User, (user) => user.groups),
     __metadata("design:type", Array)
