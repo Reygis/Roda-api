@@ -35,7 +35,7 @@ And also the creation of groups to exchange literary experiences.
 Repository: https://github.com/dreialcantara/Roda-Front <br>
 Deploy:  https://roda-lovat.vercel.app
 
-🏗️ Designers UX authors
+🏗️ Product Designers authors
 =================
 
 - [x] Laíza Mariano
