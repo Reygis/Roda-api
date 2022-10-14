@@ -24,7 +24,7 @@ export class GroupController {
 
         await groupRepository.save(newGroup);
 
-        return res.status(201).send(newGroup); 
+        return res.status(201).send(); 
     }
 
     static listAllGroups = async (req: Request, res: Response) => {
