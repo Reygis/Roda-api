@@ -42,6 +42,9 @@ Deploy:  https://roda-lovat.vercel.app
 - [x] Mariane Souza
 - [x] Weslley Pinheiro
 
+Documentation: 
+https://available-dugout-b61.notion.site/Roda-Plataforma-Social-de-Leitura-c0efc9bc1300455991555f81286de6a8
+
 📝 Features Created
 =====================
 * Login (JWT Authentication)
