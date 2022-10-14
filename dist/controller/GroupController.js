@@ -24,6 +24,7 @@ GroupController.create = async (req, res) => {
         users
     });
     await groupRepository_1.groupRepository.save(newGroup);
+    return res.status(201).send();
 };
 GroupController.listAllGroups = async (req, res) => {
     const groups = await groupRepository_1.groupRepository.find({
