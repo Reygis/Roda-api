@@ -8,8 +8,8 @@
 <p align="center">
 This project provides a API for exchanging books and experiences.
 </p>
-<p align="center"><a href="https://insomnia.rest/run/?label=Parrot&uri=https%3A%2F%2Fraw.githubusercontent.com%2FNeryVictor%2Fparrot%2Fmain%2F.docs%2FInsomnia_2022-09-09.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
-</a></p>
+<p align="center"><a href="https://insomnia.rest/run/?label=RodaApi&uri=https%3A%2F%2Fraw.githubusercontent.com%2FNeryVictor%2FNeryVictor%2Fmain%2FRodaInsomniaButton%3Ftoken%3DGHSAT0AAAAAABWLGETIQRERM3IFI3VEMGDIY2J77LA" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+</p>
 
 ✨ Client
 ===============
@@ -32,8 +32,8 @@ And also the creation of groups to exchange literary experiences.
 
 - [x] Andrei Alcantara
 
-Repository: https://github.com/dreialcantara/Roda-Front <br>
-Deploy:  https://roda-lovat.vercel.app
+Deploy:  https://roda-lovat.vercel.app<br>
+Repository: https://github.com/dreialcantara/Roda-Front
 
 🏗️ Product Designers authors
 =================
@@ -89,9 +89,6 @@ $ npm install
 
 # Create database
 $ npm db:create
-
-# Generate migrations
-$ npm migration:generate
 
 # Run migrations
 $ npm migration:run
@@ -275,4 +272,4 @@ Made by <br>
 
 🔹 Laíza Mariano 👋 [Get in touch](https://www.linkedin.com/in/la%C3%ADzamariano/)<br>
 🔹 Mariane Souza 👋 [Get in touch](https://www.linkedin.com/in/mariane-souza-42576b65/)<br>
-🔹 Weslley Pinheiro 👋 [Get in touch](https://www.linkedin.com/in/weslley-pinheiro-8751251a6/)<br>
+🔹 Weslley Pinheiro 👋 [Get in touch](https://www.linkedin.com/in/weslley-pinheiro-8751251a6/)
