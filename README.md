@@ -185,12 +185,10 @@ Json example:
 Json example:
 
 ```
-{
-    "name":"Harry", 
-    "genres": "Drama, Fiction, Action",
-    "description": " A good book description is a detailed", 
-    "condition": "4"
-}  
+{  
+	"isbnstring":"8532511015"
+}
+
 ```
 
 #### List all books
@@ -214,7 +212,7 @@ Json example:
   GET http://roda-api.herokuapp.com/book/mybooks
 ```
 
-#### Create Book Rating
+#### Create Book Review
 
 ```http
   POST http://roda-api.herokuapp.com/review/create/:idbook
