@@ -23,7 +23,7 @@ export class BookController {
             authors: book.authors,
             description: book.description,
             genres: book.categories,
-            imageurl: book.imageLinks.thumbnail,
+            imageurl: book.imageLinks?.thumbnail,
             pageCount: book.pageCount,
             users
         })
@@ -38,7 +38,7 @@ export class BookController {
             return res.status(400)
         }
 
-        return res.status(201).json(book)
+        return res.status(201).json(newbook)
 
     }
 
