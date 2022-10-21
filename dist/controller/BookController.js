@@ -10,6 +10,7 @@ class BookController {
 exports.BookController = BookController;
 _a = BookController;
 BookController.create = async (req, res) => {
+    var _b;
     const { isbnstring } = req.body;
     const users = req.user;
     const isbn = require('node-isbn');
@@ -25,7 +26,7 @@ BookController.create = async (req, res) => {
         authors: book.authors,
         description: book.description,
         genres: book.categories,
-        imageurl: book.imageLinks.thumbnail,
+        imageurl: (_b = book.imageLinks) === null || _b === void 0 ? void 0 : _b.thumbnail,
         pageCount: book.pageCount,
         users
     });
@@ -39,7 +40,7 @@ BookController.create = async (req, res) => {
     catch (error) {
         return res.status(400);
     }
-    return res.status(201).json(book);
+    return res.status(201).json(newbook);
 };
 BookController.listAllBooks = async (req, res) => {
     const books = await bookRepository_1.bookRepository.find({
