@@ -9,7 +9,7 @@ class GroupController {
 exports.GroupController = GroupController;
 _a = GroupController;
 GroupController.create = async (req, res) => {
-    const { name, about, discussion, books } = req.body;
+    const { name, about, discussion, books, label } = req.body;
     const groupExists = await groupRepository_1.groupRepository.findOneBy({ name });
     if (groupExists) {
         return res.status(400).json({ message: "Nome de grupo já está em uso!" });
@@ -21,6 +21,7 @@ GroupController.create = async (req, res) => {
         about,
         discussion,
         books,
+        label,
         users
     });
     await groupRepository_1.groupRepository.save(newGroup);
@@ -36,11 +37,19 @@ GroupController.groupsOfUser = async (req, res) => {
     const { iduser } = req.user;
     const groups = await userRepository_1.userRepository.findOne({
         relations: {
-            groups: true,
+            groups: {
+                users: true,
+            }
         },
         where: {
             iduser: iduser
         }
     });
-    return res.send(groups === null || groups === void 0 ? void 0 : groups.groups);
+    const filtredgroups = [];
+    groups === null || groups === void 0 ? void 0 : groups.groups.forEach(element => {
+        const { users: _, ...filtredelement } = element;
+        Object.assign(filtredelement, { numberofusers: element.users.length });
+        filtredgroups.push(filtredelement);
+    });
+    return res.send(filtredgroups);
 };

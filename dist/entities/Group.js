@@ -39,6 +39,10 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "books", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Group.prototype, "label", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Group.prototype, "created_at", void 0);

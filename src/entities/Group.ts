@@ -35,7 +35,10 @@ export class Group {
 
     @Column()
     books: string
-    
+
+    @Column({nullable: true})
+    label: string
+
     @CreateDateColumn()
     created_at: Date;
   

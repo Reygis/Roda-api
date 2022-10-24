@@ -5,7 +5,7 @@ import { userRepository } from "../repositories/userRepository";
 export class GroupController {
 
     static create = async (req: Request, res: Response) => {
-        const { name, about, discussion, books } = req.body;
+        const { name, about, discussion, books, label } = req.body;
 
         const groupExists = await groupRepository.findOneBy({ name });
         if (groupExists) {
@@ -19,6 +19,7 @@ export class GroupController {
             about,
             discussion,
             books,
+            label,
             users
         });
 
@@ -39,13 +40,22 @@ export class GroupController {
 
         const groups = await userRepository.findOne({
             relations: {
-                groups: true,
+                groups:{
+                    users:true,
+                }
             },
             where: {
                 iduser: iduser
             }
+        })  
+        
+        const filtredgroups:any = []
+        groups?.groups.forEach( element => {
+            const { users:_, ...filtredelement } = element 
+            Object.assign(filtredelement, {numberofusers:element.users.length})
+            filtredgroups.push(filtredelement);
         })
-
-        return res.send(groups?.groups)
+        
+        return res.send(filtredgroups)
     }
 }
